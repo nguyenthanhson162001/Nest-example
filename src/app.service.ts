@@ -3,7 +3,7 @@ import { Injectable, Query } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): { message: string } {
-    return { message: 'Hello World!4' };
+    return { message: 'Hello World!' };
   }
 
   getDocs(version?: string) {

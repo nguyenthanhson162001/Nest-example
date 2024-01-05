@@ -1,14 +1,18 @@
 import { Controller, Get, Query, Redirect } from '@nestjs/common';
 import { AppService } from './app.service';
+import { CatService } from './models/cats/cats.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly catService: CatService,
+  ) {}
   // eslint-disable-next-line prettier/prettier
 
   @Get()
   getHello(): { message: string } {
-    return this.appService.getHello();
+    return this.catService.getHello();
   }
 
   @Get('docs')

@@ -7,10 +7,12 @@ import {
   Put,
   Body,
   Param,
+  HttpException,
+  HttpStatus,
+  UseFilters,
 } from '@nestjs/common';
 import { CreateCatDto, ListAllEntities, UpdateCatDto } from './cat.dto';
 import { CatService } from './cats.service';
-
 @Controller('cats')
 export class CatController {
   constructor(private readonly catService: CatService) {}
@@ -23,6 +25,7 @@ export class CatController {
 
   @Get()
   findAll(@Query() query: ListAllEntities) {
+    throw new HttpException({ query }, HttpStatus.INTERNAL_SERVER_ERROR);
     return this.catService.findAll(query);
   }
 
