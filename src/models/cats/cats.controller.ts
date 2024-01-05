@@ -10,15 +10,20 @@ import {
   HttpException,
   HttpStatus,
   UseFilters,
+  ParseIntPipe,
+  UsePipes,
 } from '@nestjs/common';
 import { CreateCatDto, ListAllEntities, UpdateCatDto } from './cat.dto';
 import { CatService } from './cats.service';
+import { createCatSchema } from './cat.zod.schema';
+import { ZodValidationPipe } from 'src/common/validation/zod.validation.pipe';
 @Controller('cats')
 export class CatController {
   constructor(private readonly catService: CatService) {}
   // genderate the same CURD with examble below
 
   @Post()
+  @UsePipes(new ZodValidationPipe(createCatSchema))
   create(@Body() createCatDto: CreateCatDto) {
     return this.catService.create(createCatDto);
   }
@@ -30,7 +35,7 @@ export class CatController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.catService.findOne(id);
   }
 

@@ -11,7 +11,7 @@ import { AllExceptionsFilterProvider } from './common/filter/all-exceptions.filt
 @Module({
   imports: [CatModule, DogModule],
   controllers: [AppController],
-  providers: [AllExceptionsFilterProvider, AppService],
+  providers: [HttpExceptionFilterProvider, AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
